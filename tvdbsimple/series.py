@@ -9,6 +9,7 @@ See [Series API section](https://api.thetvdb.com/swagger#/Series)
 
 from .base import TVDB
 
+
 class Series(TVDB):
     """
     Series class to retrieve all the info about a series.
@@ -20,22 +21,22 @@ class Series(TVDB):
         'actors': '/{id}/actors'
     }	
 
-    def __init__(self, id, language=''):
+    def __init__(self, series_id, language=''):
         """
         Initialize the series class.
-        `id` is the TheTVDb series id. You can also provide `language`, 
+        `series_id` is the TheTVDb series id. You can also provide `language`,
         the language id you want to use to retrieve the info.
         """
         self._set_language(language)
-        self.Images = Series_Images(id, language)
+        self.Images = SeriesImages(series_id, language)
         """
         Allows to retrieve images info.
         """
-        self.Episodes = Series_Episodes(id, language)
+        self.Episodes = SeriesEpisodes(series_id, language)
         """
         Allows to retrieve episodes info.
         """
-        super(Series, self).__init__(id)
+        super(Series, self).__init__(series_id)
 
     def info(self, language=''):
         """
@@ -93,7 +94,8 @@ class Series(TVDB):
         self._set_attrs_to_values({'actors': response})
         return response
 
-class Series_Episodes(TVDB):
+
+class SeriesEpisodes(TVDB):
     """
     Class needed to organize series episodes. Allow to retrieve basic 
     info episodes for the series.
@@ -110,11 +112,11 @@ class Series_Episodes(TVDB):
     _PAGES_LIST = {}
     _FILTERS = {}
 
-    def __init__(self, id, language='', **kwargs):
+    def __init__(self, series_id, language='', **kwargs):
         """
         Initialize the class.
 
-        `id` is the TheTVDb series id.
+        `series_id` is the TheTVDb series id.
         You can  provide `language`, the language id you want to use to 
         retrieve the info.
         You can  provide `absoluteNumber` to get only episodes with the 
@@ -130,7 +132,7 @@ class Series_Episodes(TVDB):
         You can  provide `imdbId` to get only episodes with the 
         provided imdb id.
         """
-        super(Series_Episodes, self).__init__(id)
+        super(SeriesEpisodes, self).__init__(series_id)
         self._set_language(language)
         self.update_filters(**kwargs)
 
@@ -151,7 +153,7 @@ class Series_Episodes(TVDB):
         You can  provide `imdbId` to get only episodes with the 
         provided imdb id.
         """
-        self._FILTERS=kwargs
+        self._FILTERS = kwargs
 
     def summary(self):
         """
@@ -165,7 +167,7 @@ class Series_Episodes(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showeps = tvdb.Series_Episodes(78804)
+            >>> showeps = tvdb.SeriesEpisodes(78804)
             >>> response = showeps.summary()
             >>> showeps.airedEpisodes
             '267'
@@ -210,14 +212,14 @@ class Series_Episodes(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showeps = tvdb.Series_Episodes(78804)
+            >>> showeps = tvdb.SeriesEpisodes(78804)
             >>> response = showeps.all()
             >>> showeps.episodes[0]['episodeName']
             'Rose'
 
         """
         episodes = []
-        for i in range (1, self.pages()+1):
+        for i in range(1, self.pages()+1):
             episodes.extend(self.page(i))
         
         self._set_attrs_to_values({'episodes': episodes})
@@ -239,7 +241,7 @@ class Series_Episodes(TVDB):
         
         filters = self._FILTERS.copy()
         filters['page'] = page
-        response = self._GET(path, params=filters, cleanJson=False)
+        response = self._GET(path, params=filters, clean_json=False)
         if 'links' in response and 'last' in response['links']:
             self._PAGES = response['links']['last']
 
@@ -247,10 +249,11 @@ class Series_Episodes(TVDB):
         return response['data']
 
     def __iter__(self):
-        for i in range (1, self.pages()+1):
+        for i in range(1, self.pages()+1):
             yield self.page(i)
 
-class Series_Images(TVDB):
+
+class SeriesImages(TVDB):
     """
     Class needed to organize series images. Allow to retrieve all 
     the types of images of a series.
@@ -268,7 +271,7 @@ class Series_Images(TVDB):
     }
     _FILTERS = {}
 
-    def __init__(self, id, language='', **kwargs):
+    def __init__(self, series_id, language='', **kwargs):
         """
         Initialize the class.
 
@@ -280,7 +283,7 @@ class Series_Images(TVDB):
         You can  provide `subKey` to get only episodes with the 
         provided subKey.
         """
-        super(Series_Images, self).__init__(id)
+        super(SeriesImages, self).__init__(series_id)
         self._set_language(language)
         self.update_filters(**kwargs)
 
@@ -295,7 +298,7 @@ class Series_Images(TVDB):
         You can  provide `subKey` to get only episodes with the 
         provided subKey.
         """
-        self._FILTERS=kwargs
+        self._FILTERS = kwargs
 
     def summary(self):
         """
@@ -309,7 +312,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804)
+            >>> showimgs = tvdb.SeriesImages(78804)
             >>> response = showimgs.summary()
             >>> showimgs.summary['poster']
             53
@@ -334,7 +337,6 @@ class Series_Images(TVDB):
         self._set_attrs_to_values({'query_params': response})
         return response
 
-
     def poster(self, language=''):
         """
         Get the posters for a specific show.
@@ -349,7 +351,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804)
+            >>> showimgs = tvdb.SeriesImages(78804)
             >>> response = showimgs.poster()
             >>> showimgs.poster[0]['resolution']
             '680x1000'
@@ -371,7 +373,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804)
+            >>> showimgs = tvdb.SeriesImages(78804)
             >>> response = showimgs.fanart()
             >>> showimgs.fanart[0]['resolution']
             '1280x720'
@@ -393,7 +395,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804)
+            >>> showimgs = tvdb.SeriesImages(78804)
             >>> response = showimgs.series()
             >>> showimgs.series[0]['thumbnail']
             '_cache/text/34391.jpg'
@@ -415,7 +417,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804)
+            >>> showimgs = tvdb.SeriesImages(78804)
             >>> response = showimgs.season()
             >>> showimgs.season[0]['thumbnail']
             '_cache/seasons/34391-1.jpg'
@@ -437,7 +439,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804)
+            >>> showimgs = tvdb.SeriesImages(78804)
             >>> response = showimgs.seasonwide()
             >>> showimgs.seasonwide[0]['thumbnail']
             '_cache/seasonswide/78804-1.jpg'
@@ -460,7 +462,7 @@ class Series_Images(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> showimgs = tvdb.Series_Images(78804, resolution='1280x720')
+            >>> showimgs = tvdb.SeriesImages(78804, resolution='1280x720')
             >>> response = showimgs.all()
             >>> showimgs.images[0]['resolution']
             '1280x720'

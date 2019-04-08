@@ -9,6 +9,7 @@ See [Search API section](https://api.thetvdb.com/swagger#!/Search)
 
 from .base import TVDB
 
+
 class Search(TVDB):
     """
     Class that allow to search for series with filters.
@@ -19,12 +20,12 @@ class Search(TVDB):
         'seriesparams': '/series/params'
     }
 
-    def series(self, name='', imdbId='', zap2itId='', language=''):
+    def series(self, name='', imdb_id='', zap2it_id='', language=''):
         """
         Search series with the information provided.
 
-        You can set `name` to search for a series with that name. You can set `imdbId` 
-        to search a series with the provided imdb id. You can set `zap2itId` 
+        You can set `name` to search for a series with that name. You can set `imdb_id`
+        to search a series with the provided imdb id. You can set `zap2it_id`
         to search a series with the provided zap2it id. You can set `language` to 
         retrieve the results with the provided language.
 
@@ -46,10 +47,10 @@ class Search(TVDB):
         filters = {}
         if name:
             filters['name'] = name
-        if imdbId:
-            filters['imdbId'] = imdbId
-        if zap2itId:
-            filters['zap2itId'] = zap2itId
+        if imdb_id:
+            filters['imdbId'] = imdb_id
+        if zap2it_id:
+            filters['zap2itId'] = zap2it_id
 
         self._set_language(language)
         response = self._GET(path, params=filters)

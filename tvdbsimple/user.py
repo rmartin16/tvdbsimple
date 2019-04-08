@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 """
 This module implements the User functionality of TheTVDb API.
@@ -8,6 +8,7 @@ See [Users API section](https://api.thetvdb.com/swagger#!/Users)
 """
 
 from .base import TVDB
+
 
 class User(TVDB):
     """
@@ -30,7 +31,7 @@ class User(TVDB):
         [account info](http://thetvdb.com/?tab=userinfo) under account identifier.
         """
         super(User, self).__init__(user=user, key=key)
-        self.Ratings = User_Ratings(user, key)
+        self.Ratings = UserRatings(user, key)
         """
         Allows to retrieve, add and delete user ratings.
         """
@@ -82,7 +83,8 @@ class User(TVDB):
         self._set_attrs_to_values(response)
         return self._clean_return(response)
 
-    def _clean_return(self,jsn):
+    @staticmethod
+    def _clean_return(jsn):
         if 'favorites' in jsn:
             return jsn['favorites']
         return jsn
@@ -133,7 +135,8 @@ class User(TVDB):
         
         return self._clean_return(self._DELETE(path))
 
-class User_Ratings(TVDB):
+
+class UserRatings(TVDB):
     """
     Class needed to organize user ratings. Allows to retrieve, add and delete user ratings.
 
@@ -161,7 +164,7 @@ class User_Ratings(TVDB):
         It's possible to provide `itemType` that filters ratings by type. 
         Can be either 'series', 'episode', or 'banner'.
         """
-        super(User_Ratings, self).__init__(user=user, key=key)
+        super(UserRatings, self).__init__(user=user, key=key)
         self._FILTERS = {}
         self.update_filters(**kwargs)
 
@@ -212,7 +215,7 @@ class User_Ratings(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> rtn = tvdb.User_Ratings('username', 'userkey')
+            >>> rtn = tvdb.UserRatings('username', 'userkey')
             >>> response = rtn.add('series', 78804, 8)
 
         """
@@ -235,7 +238,7 @@ class User_Ratings(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> rtn = tvdb.User_Ratings('username', 'userkey')
+            >>> rtn = tvdb.UserRatings('username', 'userkey')
             >>> response = rtn.delete('series', 78804)
 
         """
@@ -255,14 +258,14 @@ class User_Ratings(TVDB):
             #!python
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> rtn = tvdb.User_Rating('phate89', '3EF7CF9BBC8BB430')
+            >>> rtn = tvdb.UserRating('phate89', '3EF7CF9BBC8BB430')
             >>> response = rtn.all()
             >>> rtn.ratings[0]['ratingType']
             'episode'
 
         """
         ratings = []
-        for i in range (1, self.pages()+1):
+        for i in range(1, self.pages()+1):
             ratings.extend(self.page(i))
         
         self._set_attrs_to_values({'ratings': ratings})
@@ -285,7 +288,7 @@ class User_Ratings(TVDB):
         
         filters = self._FILTERS.copy()
         filters['page'] = page
-        response = self._GET(path, params=filters, cleanJson=False)
+        response = self._GET(path, params=filters, clean_json=False)
         if 'links' in response and 'last' in response['links']:
             self._PAGES = response['links']['last']
 
@@ -293,5 +296,5 @@ class User_Ratings(TVDB):
         return response['data']
 
     def __iter__(self):
-        for i in range (1, self.pages()+1):
+        for i in range(1, self.pages()+1):
             yield self.page(i)

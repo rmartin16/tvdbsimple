@@ -9,6 +9,7 @@ See [Updates API section](https://api.thetvdb.com/swagger#!/Updates)
 
 from .base import TVDB
 
+
 class Updates(TVDB):
     """
     Updates class to retrieve updated series in a timespan.
@@ -21,7 +22,7 @@ class Updates(TVDB):
     }
     _FILTERS = {}
 
-    def __init__(self, fromTime, toTime='', language=''):
+    def __init__(self, from_time, to_time='', language=''):
         """
         Initialize the Updates class.
         `fromTime` is the epoch time to start your date range to search for.
@@ -30,9 +31,10 @@ class Updates(TVDB):
         You can also set `language` with a language id to get the result 
         in the specific language.
         """
-        self.update_filters(fromTime, toTime, language)
+        super(Updates, self).__init__()
+        self.update_filters(from_time, to_time, language)
 
-    def update_filters(self, fromTime='', toTime='', language=''):
+    def update_filters(self, from_time='', to_time='', language=''):
         """
         Updates the filters for the updates class.
 
@@ -42,10 +44,10 @@ class Updates(TVDB):
         You can also set `language` with a language id to get the result 
         in the specific language.
         """
-        if fromTime:
-            self._FILTERS['fromTime'] = fromTime
-        if fromTime:
-            self._FILTERS['toTime'] = toTime
+        if from_time:
+            self._FILTERS['fromTime'] = from_time
+        if from_time:
+            self._FILTERS['toTime'] = to_time
         if language:
             self._set_language(language)
 

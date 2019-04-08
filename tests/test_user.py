@@ -9,6 +9,7 @@ import tvdbsimple as tvdb
 import sys
 
 from tests import USER, USER_KEY
+
 if not tvdb.keys.API_KEY:
     tvdb.keys.API_KEY = API_KEY
 
@@ -16,6 +17,7 @@ if not tvdb.keys.API_KEY:
 Constants
 """
 SERIES_ID = "2738" + str(sys.version_info.major) + str(sys.version_info.minor)
+
 
 class UserTestCase(unittest.TestCase):
     def test_user_info(self):
@@ -36,17 +38,17 @@ class UserTestCase(unittest.TestCase):
     def test_user_delete_favorite(self):
         user = tvdb.User(USER, USER_KEY)
         response = user.delete_favorite(SERIES_ID)
-        self.assertTrue(SERIES_ID  not in response)
+        self.assertTrue(SERIES_ID not in response)
 
-    def test_user_favorites(self):
+    def test_user_ratings(self):
         user = tvdb.User(USER, USER_KEY)
         response = user.Ratings.all()
         self.assertTrue(hasattr(user.Ratings, 'ratings'))
 
-    def test_user_add_favorite(self):
+    def test_user_add_rating(self):
         user = tvdb.User(USER, USER_KEY)
         response = user.Ratings.add('series', SERIES_ID, 8)
 
-    def test_user_delete_favorite(self):
+    def test_user_delete_rating(self):
         user = tvdb.User(USER, USER_KEY)
         response = user.Ratings.delete('series', SERIES_ID)

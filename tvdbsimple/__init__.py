@@ -57,13 +57,13 @@ __license__ = 'GPLv3'
 from .base import APIKeyError
 from .keys import keys
 from .search import Search
-from .series import Series, Series_Episodes, Series_Images
+from .series import Series, SeriesEpisodes, SeriesImages
 from .languages import Languages
 from .episode import Episode
 from .updates import Updates
-from .user import User, User_Ratings
+from .user import User, UserRatings
 
-KEYS=keys()
+KEYS = keys()
 """
 Contains `API_KEY` and `API_TOKEN`.
 

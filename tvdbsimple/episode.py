@@ -9,6 +9,7 @@ See [Episodes API section](https://api.thetvdb.com/swagger#!/Episodes)
 
 from .base import TVDB
 
+
 class Episode(TVDB):
     """
     Episode class to retrieve detailed info about an episode.
@@ -19,14 +20,14 @@ class Episode(TVDB):
         'info': '/{id}'
     }
 
-    def __init__(self, id, language=''):
+    def __init__(self, episode_id, language=''):
         """
         Initialize the episode class.
 
         `id` is the TheTVDb episode id. You can also provide `language`, 
         the language id you want to use to retrieve the info.
         """
-        super(Episode, self).__init__(id)
+        super(Episode, self).__init__(episode_id)
         self._set_language(language)
 
     def info(self, language=''):

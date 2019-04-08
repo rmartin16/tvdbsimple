@@ -9,6 +9,7 @@ import tvdbsimple as tvdb
 
 if not tvdb.keys.API_KEY:
     from tests import API_KEY
+
     tvdb.keys.API_KEY = API_KEY
 
 """
@@ -16,6 +17,7 @@ Constants
 """
 SRC_STR = 'doctor who 2005'
 SRC_NAME = 'Doctor Who (2005)'
+
 
 class SearchTestCase(unittest.TestCase):
     def test_search_series(self):
