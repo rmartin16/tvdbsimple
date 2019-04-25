@@ -7,27 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5b03c68-eb28-484b-a19e-bdb8c695708d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/tvdbsimpleredux.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_episode.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_episode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_languages.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_languages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_series.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_series.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/episode.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/episode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/keys.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/keys.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/languages.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/languages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/series.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/series.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/updates.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/updates.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tvdbsimple/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tvdbsimple/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +61,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="width" value="1431" />
     <option name="height" value="1485" />
   </component>
@@ -90,6 +70,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -111,12 +92,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -144,16 +125,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1431" height="1485" extended-state="0" />
+    <frame x="0" y="0" width="1431" height="1485" extended-state="1" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4996321" visible="true" weight="0.1502849" />
       <window_info id="Structure" order="1" sideWeight="0.50036794" side_tool="true" weight="0.1502849" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32965416" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.32965416" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" anchor="bottom" id="Event Log" side_tool="true" visible="true" weight="0.32965416" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965416" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -161,6 +137,11 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.33358097" />
+      <window_info anchor="bottom" id="Inspection Results" order="8" weight="0.32965416" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32965416" />
+      <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -187,6 +168,20 @@
                 </list>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
           </value>
         </entry>
       </map>
