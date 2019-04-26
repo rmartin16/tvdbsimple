@@ -11,6 +11,10 @@ class keys:
     """
     The class is needed to hold the api key value and the token value.
     """
+
+    def __init__(self):
+        pass
+
     API_KEY = os.environ.get('TVDB_API_KEY', None)
     """
     It's the TheTVDb api key needed for the api access. The developer must fill it.
