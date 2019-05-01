@@ -45,10 +45,12 @@ class UserTestCase(unittest.TestCase):
         response = user.Ratings.all()
         self.assertTrue(hasattr(user.Ratings, 'ratings'))
 
-    def test_user_add_rating(self):
+    @staticmethod
+    def test_user_add_rating():
         user = tvdb.User(USER, USER_KEY)
         response = user.Ratings.add('series', SERIES_ID, 8)
 
-    def test_user_delete_rating(self):
+    @staticmethod
+    def test_user_delete_rating():
         user = tvdb.User(USER, USER_KEY)
         response = user.Ratings.delete('series', SERIES_ID)

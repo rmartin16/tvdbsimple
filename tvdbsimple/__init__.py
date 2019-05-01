@@ -55,7 +55,7 @@ __copyright__ = 'Copyright © 2017 phate89'
 __license__ = 'GPLv3'
 
 from .base import APIKeyError
-from .keys import keys
+from .keys import Keys
 from .search import Search
 from .series import Series, SeriesEpisodes, SeriesImages
 from .languages import Languages
@@ -63,7 +63,7 @@ from .episode import Episode
 from .updates import Updates
 from .user import User, UserRatings
 
-KEYS = keys()
+KEYS = Keys()
 """
 Contains `API_KEY` and `API_TOKEN`.
 

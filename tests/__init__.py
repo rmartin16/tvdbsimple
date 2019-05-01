@@ -8,6 +8,8 @@ Use the following command to run all the tests:
 
 """
 import os
+from builtins import ImportError
+
 """
 Either place your API_KEY in the following constant:
 """

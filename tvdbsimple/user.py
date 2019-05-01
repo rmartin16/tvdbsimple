@@ -89,7 +89,7 @@ class User(TVDB):
             return jsn['favorites']
         return jsn
 
-    def add_favorite(self, id):
+    def add_favorite(self, series_id):
         """
         Add a series to user favorite series from its series id.
         
@@ -108,11 +108,11 @@ class User(TVDB):
             '78804'
 
         """
-        path = self._get_path('alter_favorite').format(id=id)
+        path = self._get_path('alter_favorite').format(id=series_id)
         
         return self._clean_return(self._PUT(path))
 
-    def delete_favorite(self, id):
+    def delete_favorite(self, series_id):
         """
         Delete a series from user favorite series from its series id.
         
@@ -131,7 +131,7 @@ class User(TVDB):
             '73545'
 
         """
-        path = self._get_path('alter_favorite').format(id=id)
+        path = self._get_path('alter_favorite').format(id=series_id)
         
         return self._clean_return(self._DELETE(path))
 
@@ -199,7 +199,7 @@ class UserRatings(TVDB):
             self.page(1)
         return self._PAGES
 
-    def add(self, type, id, rating):
+    def add(self, item_type, item_id, rating):
         """
         Add a new rating to the user's ratings..
         
@@ -219,11 +219,11 @@ class UserRatings(TVDB):
             >>> response = rtn.add('series', 78804, 8)
 
         """
-        path = self._get_path('add').format(itemType=type, itemId=id, itemRating=rating)
+        path = self._get_path('add').format(itemType=item_type, itemId=item_id, itemRating=rating)
         
         return self._PUT(path)
 
-    def delete(self, type, id):
+    def delete(self, item_type, item_id):
         """
         Delete an existing user's rating..
         
@@ -242,7 +242,7 @@ class UserRatings(TVDB):
             >>> response = rtn.delete('series', 78804)
 
         """
-        path = self._get_path('delete').format(itemType=type, itemId=id)
+        path = self._get_path('delete').format(itemType=item_type, itemId=item_id)
         
         return self._DELETE(path)
 

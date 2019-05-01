@@ -470,14 +470,14 @@ class SeriesImages(TVDB):
         """
         return self._get_image_type('images', language)
 
-    def _get_image_type(self, type, language=''):
+    def _get_image_type(self, image_type, language=''):
         path = self._get_id_path('imagequery')
         
         self._set_language(language)
         filters = self._FILTERS.copy()
-        if type != 'images':
-            filters['keyType'] = type
+        if image_type != 'images':
+            filters['keyType'] = image_type
 
         response = self._GET(path, params=filters)
-        self._set_attrs_to_values({type: response})
+        self._set_attrs_to_values({image_type: response})
         return response

@@ -47,7 +47,6 @@ class TVDB(object):
         You can also provide `key`, that is the userkey needed to 
         authenticate with the user, you can find it in the 
         [account info](http://thetvdb.com/?tab=userinfo) under account identifier., 
-        the language id you want to use to retrieve the info.
         """
         self._ID = item_id
         self.USER = user
@@ -118,7 +117,7 @@ class TVDB(object):
                 error = "Unknown error while authenticating. Check your api key or your user/userkey"
                 try:
                     error = response.json()['error']
-                except:
+                except Exception:
                     pass
                 raise AuthenticationError(error)
         return KEYS.API_TOKEN
@@ -143,7 +142,7 @@ class TVDB(object):
             return self._request(method=method, path=path, params=params, payload=payload, force_new_token=True)
         try:
             raise Exception(response.json()['error'])
-        except:
+        except Exception:
             response.raise_for_status()
 
     def _GET(self, path, params=None, clean_json=True):
@@ -158,13 +157,13 @@ class TVDB(object):
     def _PUT(self, path, params=None, payload=None, clean_json=True):
         return self._request('PUT', path, params=params, payload=payload, clean_json=clean_json)
 
-    def _set_attrs_to_values(self, response={}):
+    def _set_attrs_to_values(self, response=None):
         """
         Set attributes to dictionary values.
 
         - e.g.
         >>> import tvdbsimple as tvdb
-        >>> show = tvdb.series(10332)
+        >>> show = tvdb.Series(10332)
         >>> response = show.info()
         >>> show.title  # instead of response['title']
         """
