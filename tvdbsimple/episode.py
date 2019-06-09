@@ -27,30 +27,24 @@ class Episode(TVDB):
         `id` is the TheTVDb episode id. You can also provide `language`, 
         the language id you want to use to retrieve the info.
         """
-        super(Episode, self).__init__(episode_id)
-        self._set_language(language)
+        super(Episode, self).__init__(episode_id, language=language)
+        self.response = None
+        self._fetch_info()
 
-    def info(self, language=''):
+    def _fetch_info(self):
         """
         Get the episode information of the episode and set its values to the local attributes.
 
         You can set `language` with the language id to retrieve info in that specific language.
-
-        It returns a dictionary with all the episode info.
-
-        For example
-
-            #!python
-            >>> import tvdbsimple as tvdb
-            >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> ep = tvdb.Episode(5330530)
-            >>> ep.imdbId
-            'tt4701544'
-
         """
         path = self._get_id_path('info')
         
-        self._set_language(language)
-        response = self._GET(path)
-        self._set_attrs_to_values(response)
-        return response
+        self.response = self._GET(path)
+        self._set_attrs_to_values(self.response)
+
+    def info(self):
+        """
+        get raw TVDB episode dict
+        :return: episode dict
+        """
+        return self.response

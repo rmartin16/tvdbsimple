@@ -17,10 +17,15 @@ class Search(TVDB):
     _BASE_PATH = 'search'
     _URLS = {
         'series': '/series',
-        'seriesparams': '/series/params'
+        'series_params': '/series/params'
     }
 
-    def series(self, name='', imdb_id='', zap2it_id='', language=''):
+    def __init__(self):
+        self.results = []
+
+        super(Search, self).__init__()
+
+    def search(self, name='', imdb_id='', zap2it_id='', language=''):
         """
         Search series with the information provided.
 
@@ -37,11 +42,12 @@ class Search(TVDB):
             >>> import tvdbsimple as tvdb
             >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
             >>> search = tvdb.Search()
-            >>> reponse = search.series("doctor who 2005")
-            >>> search.series[0]['seriesName']
+            >>> response = search.search("doctor who 2005")
+            >>> search.results[0]['seriesName']
             'Doctor Who (2005)'
 
         """
+        shows = []
         path = self._get_path('series')
 
         filters = {}
@@ -54,7 +60,10 @@ class Search(TVDB):
 
         self._set_language(language)
         response = self._GET(path, params=filters)
-        self._set_attrs_to_values({'series': response})
+        #for show in response:
+        #    shows.append(TVDBShow(show))
+        self.results = shows
+        # self._set_attrs_to_values({'results': response})
         return response
 
     def series_params(self):

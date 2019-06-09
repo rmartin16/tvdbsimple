@@ -38,7 +38,7 @@ class TVDB(object):
     _URLS = {}
     _BASE_URI = 'https://api.thetvdb.com'
 
-    def __init__(self, item_id=0, user=None, key=None):
+    def __init__(self, item_id=0, language='', user=None, key=None):
         """
         Initialize the base class.
         
@@ -53,6 +53,7 @@ class TVDB(object):
         """Stores username if available"""
         self.USER_KEY = key
         """Stores user-key if available"""
+        self._set_language(language)
 
     def _get_path(self, key):
         return self._BASE_PATH + self._URLS[key]
@@ -116,7 +117,7 @@ class TVDB(object):
             else:
                 error = "Unknown error while authenticating. Check your api key or your user/userkey"
                 try:
-                    error = response.json()['error']
+                    error = response.json()['Error']
                 except Exception:
                     pass
                 raise AuthenticationError(error)
@@ -140,8 +141,10 @@ class TVDB(object):
             return jsn
         elif not force_new_token:
             return self._request(method=method, path=path, params=params, payload=payload, force_new_token=True)
+
+        # TODO: something needs to happen here...
         try:
-            raise Exception(response.json()['error'])
+            raise Exception(response.json()['Error'])
         except Exception:
             response.raise_for_status()
 
@@ -160,12 +163,6 @@ class TVDB(object):
     def _set_attrs_to_values(self, response=None):
         """
         Set attributes to dictionary values.
-
-        - e.g.
-        >>> import tvdbsimple as tvdb
-        >>> show = tvdb.Series(10332)
-        >>> response = show.info()
-        >>> show.title  # instead of response['title']
         """
         if isinstance(response, dict):
             for key in response:

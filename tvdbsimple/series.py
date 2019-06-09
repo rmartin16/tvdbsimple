@@ -27,7 +27,6 @@ class Series(TVDB):
         `series_id` is the TheTVDb series id. You can also provide `language`,
         the language id you want to use to retrieve the info.
         """
-        self._set_language(language)
         self.Images = SeriesImages(series_id, language)
         """
         Allows to retrieve images info.
@@ -36,7 +35,7 @@ class Series(TVDB):
         """
         Allows to retrieve episodes info.
         """
-        super(Series, self).__init__(series_id)
+        super(Series, self).__init__(series_id, language=language)
 
     def info(self, language=''):
         """

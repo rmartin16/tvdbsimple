@@ -7,7 +7,7 @@ TheTVDb wrapper module
 
 *tvdbsimple* is a wrapper, written in Python, for TheTVDB API v2.  By calling the functions available in *tvdbsimple* you can simplify your code and easily access a vast amount of tv series data.  To learn more about TheTVDb API, check out the `website api page`_.
 
-.. _website api page: https://api.thetvdb.com/swagger/.
+ .. _website api page: https://api.thetvdb.com/swagger/.
 
 Features
 --------

@@ -8,10 +8,6 @@ See [Languages API section](https://api.thetvdb.com/swagger#!/Languages)
 """
 from .base import TVDB
 
-import sys
-if sys.version_info > (2, 8):
-    from builtins import dict
-
 
 class Languages(TVDB):
     """
@@ -25,35 +21,29 @@ class Languages(TVDB):
     LANGUAGES = {}
     _ALL_PARSED = False
 
+    def __init__(self):
+        super(Languages, self).__init__()
+        self.all()
+
     def all(self):
         """
         Get the full languages list and set it to all attribute.
 
         Returns a list of languages with their info.
-
-        For example
-
-            #!python
-            >>> import tvdbsimple as tvdb
-            >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> lng = tvdb.Languages()
-            >>> response = lng.all()
-            >>> lng.all[0]['englishName']
-            'Chinese'
-
         """
-        if self._ALL_PARSED:
-            return self.LANGUAGES.values()
-            
+        if not self._ALL_PARSED:
+            self._get_languages()
+
+        return self.LANGUAGES.values()
+
+    def _get_languages(self):
         path = self._get_path('all')
-        
+
         response = self._GET(path)
-        self._set_attrs_to_values({'all': response})
         for lang in response:
             if 'id' in lang:
                 self.LANGUAGES[lang['id']] = lang
         self._ALL_PARSED = True
-        return response
 
     def language(self, lang_id):
         """
@@ -61,35 +51,19 @@ class Languages(TVDB):
         
         `id` is the specific language id to retrieve.
 
-        Returns a dict rwith all the language info.
-
-        For example
-
-            #!python
-            >>> import tvdbsimple as tvdb
-            >>> tvdb.KEYS.API_KEY = 'YOUR_API_KEY'
-            >>> lng = tvdb.Languages()
-            >>> response = lng.language(7)
-            >>> response['englishName']
-            'English'
-
+        Returns a dict with all the language info.
         """
-        if lang_id in self.LANGUAGES:
-            return self.LANGUAGES[id]
-
-        path = self._get_path('language').format(lid=lang_id)
-        
-        response = self._GET(path)
-        if 'lang_id' in response:
-            self.LANGUAGES[response['lang_id']] = response
-        return response
+        return self.__getitem__(lang_id)
 
     def __iter__(self):
         for i in self.all():
             yield i
 
-    def __getitem__(self, lid):
-        return self.language(lid)
+    def __getitem__(self, lang_id):
+        try:
+            return self.LANGUAGES[lang_id]
+        except KeyError:
+            return {}
 
     def __setitem__(self):
         raise Exception('Function Disabled')
